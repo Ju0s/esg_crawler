@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 import requests
 from bs4 import BeautifulSoup
+import os
 
 app = Flask(__name__)
+port = int(os.environ.get("PORT", 5000))
 
 CATEGORY_KEYWORDS = {
     "ESG 지원사업": ["모집", "신청", "접수", "공고", "설명회", "컨설팅", "세미나"],
@@ -41,4 +43,4 @@ def classify():
     return jsonify({"category": category})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=port)
