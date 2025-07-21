@@ -18,7 +18,9 @@ def fetch_article_text(url):
         res = requests.get(url, headers=headers, timeout=10)
         soup = BeautifulSoup(res.text, "html.parser")
         paragraphs = soup.find_all("p")
-        return " ".join(p.get_text() for p in paragraphs)
+        full_text = " ".join(p.get_text() for p in paragraphs)
+        print("본문 미리보기:", full_text[:500])
+        return full_text
     except Exception as e:
         print("Error fetching article:", e)
         return ""
