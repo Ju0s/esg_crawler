@@ -1,0 +1,4 @@
+Flask
+flask-cors
+newspaper3k
+selenium
