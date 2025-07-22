@@ -82,9 +82,13 @@ def summarize_text(text, limit=400):
 # ✅ API 엔드포인트
 @app.route("/check", methods=["POST"])
 def check_article():
-    print("[DEBUG] Raw request body:", request.data)
+    print("=== RAW BODY ===")
+    print(request.data)
+    print("=== HEADERS ===")
+    print(dict(request.headers))
+
     try:
-        data = request.get_json()
+        data = request.get_json(force=True)
         print("[DEBUG] Parsed JSON:", data)
     except Exception as e:
         print("[ERROR] JSON 파싱 실패:", str(e))
