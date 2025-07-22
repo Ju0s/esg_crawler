@@ -83,7 +83,10 @@ def summarize_text(text, limit=400):
 @app.route("/check", methods=["POST"])
 def check_article():
     data = request.get_json()
+    print("[DEBUG] Request data:", data)
     original_url = data.get("url")
+    print("[DEBUG] URL received:", original_url)
+    
     if not original_url:
         return jsonify({"passed": False, "error": "No URL provided"}), 400
 
