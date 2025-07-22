@@ -82,11 +82,19 @@ def summarize_text(text, limit=400):
 # ✅ API 엔드포인트
 @app.route("/check", methods=["POST"])
 def check_article():
-    data = request.get_json()
-    print("[DEBUG] Request data:", data)
+    print("[DEBUG] Raw request body:", request.data)
+    try:
+        data = request.get_json()
+        print("[DEBUG] Parsed JSON:", data)
+    except Exception as e:
+        print("[ERROR] JSON 파싱 실패:", str(e))
+        return jsonify({"passed": False, "error": "JSON parsing error"}), 400
+
+    if not data or "url" not in data:
+        return jsonify({"passed": False, "error": "No URL provided"}), 400
     original_url = data.get("url")
     print("[DEBUG] URL received:", original_url)
-    
+
     if not original_url:
         return jsonify({"passed": False, "error": "No URL provided"}), 400
 
