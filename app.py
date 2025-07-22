@@ -4,8 +4,10 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import requests, re, time
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 CATEGORY_KEYWORDS = {
     "ESG 지원사업": ['모집', '신청', '접수', '지원', '프로그램', '설명회', '세미나', '컨설팅', '실증', '인증'],
